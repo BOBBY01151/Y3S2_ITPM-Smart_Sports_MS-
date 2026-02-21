@@ -1,58 +1,70 @@
-# Smart Sports MS - MERN Stack (TypeScript)
+# 🏆 Smart Sports Event Management System
 
-This project is a Management System for Smart Sports, built with the MERN stack (MongoDB, Express, React, Node.js) using TypeScript.
+![Smart Sports Banner](assets/banner.png)
 
-## Project Structure
+[![MERN Stack](https://img.shields.io/badge/Stack-MERN-blue.svg)](https://www.mongodb.com/mern-stack)
+[![TypeScript](https://img.shields.io/badge/Language-TypeScript-blue.svg)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Frontend-Vite-646CFF.svg)](https://vitejs.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-- `backend/`: Node.js Express server with TypeScript and Mongoose.
-- `frontend/`: React application built with Vite and TypeScript.
+## 🌟 Overview
 
-## Getting Started
+The **Smart Sports Event Management System** is a next-generation platform designed to streamline the organization, tracking, and management of modern athletic events. Built with a focus on real-time analytics and high-performance user interfaces, it empowers organizers and athletes with a data-driven experience.
+
+### 🚀 Key Features
+
+- **Real-time Event Tracking**: Monitor live games and athlete performance with zero latency.
+- **Dynamic Leaderboards**: High-fidelity 3D-styled visual scoreboards.
+- **Comprehensive Management**: Full CRUD operations for sports, events, athletes, and schedules.
+- **Modern UI/UX**: Premium, glassmorphic design system tailored for sports analytics.
+
+---
+
+## 🛠 Project Structure
+
+The project follows a modular MERN architecture with full TypeScript support:
+
+- **[backend](file:///Users/vimukthibuddika/Documents/Business/Github/Y3S2_ITPM-Smart_Sports_MS-/backend)**: Robust Node.js API with Express & Mongoose.
+- **[frontend](file:///Users/vimukthibuddika/Documents/Business/Github/Y3S2_ITPM-Smart_Sports_MS-/frontend)**: Ultra-fast React application powered by Vite.
+
+---
+
+## 🚦 Getting Started
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
-- MongoDB (running locally or a remote URI)
+- **Node.js** (v18+)
+- **MongoDB** (Local or Atlas Atlas URI)
 
-### Backend Setup
+### 📦 Installation
 
-1. Navigate to the `backend` directory:
-   ```bash
-   cd backend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file based on `.env.example` and add your MongoDB URI and Preferred Port.
-4. Run the development server:
-   ```bash
-   npm run dev
-   ```
+#### Backend Setup
+1. `cd backend`
+2. `npm install`
+3. Configure `.env` (use `.env.example` as a template)
+4. `npm run dev`
 
-### Frontend Setup
+#### Frontend Setup
+1. `cd frontend`
+2. `npm install`
+3. Configure `.env`
+4. `npm run dev`
 
-1. Navigate to the `frontend` directory:
-   ```bash
-   cd frontend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file based on `.env.example` and add your backend API URL.
-4. Run the development server:
-   ```bash
-   npm run dev
-   ```
+---
 
-## Scripts
+## 🧪 Development Workflow
 
-- **Backend**:
-  - `npm run dev`: Starts the server with `ts-node-dev`.
-  - `npm run build`: Compiles TypeScript to JavaScript in `dist/`.
-  - `npm run start`: Runs the compiled server from `dist/`.
-- **Frontend**:
-  - `npm run dev`: Starts the Vite dev server.
-  - `npm run build`: Builds the production-ready application.
-  - `npm run preview`: Previews the production build locally.
+| Component | Dev Command | Build Command |
+| :--- | :--- | :--- |
+| **Backend** | `npm run dev` | `npm run build` |
+| **Frontend** | `npm run dev` | `npm run build` |
+
+---
+
+## 💎 Premium Loading Styles
+
+The application features custom 3D CSS animations to ensure a smooth, high-end "web loading" experience that mimics modern sports broadcasting interfaces.
+
+---
+
+*Developed with ❤️ for the Smart Sports Community.*
