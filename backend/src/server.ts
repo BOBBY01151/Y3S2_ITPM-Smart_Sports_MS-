@@ -2,6 +2,7 @@ import express, { type Request, type Response } from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import authRoutes from './routes/authRoutes.js';
 
 dotenv.config();
 
@@ -13,6 +14,8 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.use('/api/auth', authRoutes);
+
 app.get('/', (req: Request, res: Response) => {
     res.send('Smart Sports MS API is running...');
 });
