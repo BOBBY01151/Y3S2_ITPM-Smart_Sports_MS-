@@ -5,6 +5,7 @@ import Loader from './components/Loader'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Stores from './pages/Stores'
+import SettingsPage from './pages/Settings'
 import { isAuthenticated, logoutUser, getCurrentUser } from './services/authService'
 import { LogOut, User as UserIcon, Settings, Bell, Calendar, ShoppingBag } from 'lucide-react'
 
@@ -16,7 +17,7 @@ const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
 function Dashboard() {
   const [status, setStatus] = useState<string>('')
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [currentView, setCurrentView] = useState<'overview' | 'stores'>('overview')
+  const [currentView, setCurrentView] = useState<'overview' | 'stores' | 'settings'>('overview')
   const navigate = useNavigate();
   const user = getCurrentUser();
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001'
@@ -59,7 +60,7 @@ function Dashboard() {
           <div className={`nav-item ${currentView === 'stores' ? 'active' : ''}`} onClick={() => { setCurrentView('stores'); setIsSidebarOpen(false); }}><ShoppingBag size={20} /> Stores</div>
           <div className="nav-item" onClick={() => setIsSidebarOpen(false)}><UserIcon size={20} /> Athletes</div>
           <div className="nav-item" onClick={() => setIsSidebarOpen(false)}><Bell size={20} /> Notifications</div>
-          <div className="nav-item" onClick={() => setIsSidebarOpen(false)}><Settings size={20} /> Settings</div>
+          <div className={`nav-item ${currentView === 'settings' ? 'active' : ''}`} onClick={() => { setCurrentView('settings'); setIsSidebarOpen(false); }}><Settings size={20} /> Settings</div>
         </nav>
         <button onClick={handleLogout} className="logout-btn">
           <LogOut size={20} /> Logout
@@ -109,8 +110,10 @@ function Dashboard() {
               </div>
             </section>
           </>
-        ) : (
+        ) : currentView === 'stores' ? (
           <Stores />
+        ) : (
+          <SettingsPage />
         )}
       </main>
 
@@ -118,7 +121,9 @@ function Dashboard() {
         .dashboard-container {
           display: flex;
           color: #fff;
-          min-height: 100vh;
+          height: 100vh;
+          width: 100vw;
+          overflow: hidden;
           position: relative;
         }
 
@@ -149,6 +154,7 @@ function Dashboard() {
 
         .sidebar {
           width: 260px;
+          height: 100%;
           background: #0a0e14;
           border-right: 1px solid rgba(255, 255, 255, 0.05);
           display: flex;
@@ -156,6 +162,7 @@ function Dashboard() {
           padding: 30px 20px;
           transition: transform 0.3s ease;
           z-index: 1001;
+          flex-shrink: 0;
         }
 
         .sidebar-overlay {
@@ -236,8 +243,10 @@ function Dashboard() {
 
         .main-content {
           flex: 1;
-          padding: 40px;
+          height: 100%;
           overflow-y: auto;
+          padding: 40px;
+          background: #0a0e14;
         }
 
         .content-header {
