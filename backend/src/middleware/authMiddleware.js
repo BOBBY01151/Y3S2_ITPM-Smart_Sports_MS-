@@ -1,4 +1,3 @@
-import { type Request, type Response, type NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
@@ -6,11 +5,7 @@ dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_super_secret_key_123';
 
-export interface AuthRequest extends Request {
-    user?: any;
-}
-
-export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction): void => {
+export const authMiddleware = (req, res, next) => {
     const token = req.header('x-auth-token') || req.header('Authorization')?.replace('Bearer ', '');
 
     if (!token) {
