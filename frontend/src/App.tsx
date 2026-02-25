@@ -4,8 +4,9 @@ import axios from 'axios'
 import Loader from './components/Loader'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Stores from './pages/Stores'
 import { isAuthenticated, logoutUser, getCurrentUser } from './services/authService'
-import { LogOut, User as UserIcon, Settings, Bell, Calendar } from 'lucide-react'
+import { LogOut, User as UserIcon, Settings, Bell, Calendar, ShoppingBag } from 'lucide-react'
 
 // Protected Route Component
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
@@ -15,6 +16,7 @@ const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
 function Dashboard() {
   const [status, setStatus] = useState<string>('')
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [currentView, setCurrentView] = useState<'overview' | 'stores'>('overview')
   const navigate = useNavigate();
   const user = getCurrentUser();
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001'
@@ -53,7 +55,8 @@ function Dashboard() {
           <h1 className="logo-text">SMART<span>SPORTS</span></h1>
         </div>
         <nav className="nav-menu">
-          <div className="nav-item active" onClick={() => setIsSidebarOpen(false)}><Calendar size={20} /> Events</div>
+          <div className={`nav-item ${currentView === 'overview' ? 'active' : ''}`} onClick={() => { setCurrentView('overview'); setIsSidebarOpen(false); }}><Calendar size={20} /> Overview</div>
+          <div className={`nav-item ${currentView === 'stores' ? 'active' : ''}`} onClick={() => { setCurrentView('stores'); setIsSidebarOpen(false); }}><ShoppingBag size={20} /> Stores</div>
           <div className="nav-item" onClick={() => setIsSidebarOpen(false)}><UserIcon size={20} /> Athletes</div>
           <div className="nav-item" onClick={() => setIsSidebarOpen(false)}><Bell size={20} /> Notifications</div>
           <div className="nav-item" onClick={() => setIsSidebarOpen(false)}><Settings size={20} /> Settings</div>
@@ -69,7 +72,7 @@ function Dashboard() {
       {/* Main Content */}
       <main className="main-content">
         <header className="content-header">
-          <h2>Welcome back, {user?.firstName}!</h2>
+          <h2>{currentView === 'overview' ? `Welcome back, ${user?.firstName}!` : 'Product Catalog'}</h2>
           <div className="header-actions">
             <span className="api-status" style={{ color: status.includes('Error') ? '#ff4b2b' : '#00f2ff' }}>
               System: {status}
@@ -80,29 +83,35 @@ function Dashboard() {
           </div>
         </header>
 
-        <section className="dashboard-grid">
-          <div className="stat-card">
-            <h3>Active Events</h3>
-            <p className="stat-value">12</p>
-          </div>
-          <div className="stat-card">
-            <h3>Total Athletes</h3>
-            <p className="stat-value">248</p>
-          </div>
-          <div className="stat-card">
-            <h3>Upcoming Matches</h3>
-            <p className="stat-value">5</p>
-          </div>
-        </section>
+        {currentView === 'overview' ? (
+          <>
+            <section className="dashboard-grid">
+              <div className="stat-card">
+                <h3>Active Events</h3>
+                <p className="stat-value">12</p>
+              </div>
+              <div className="stat-card">
+                <h3>Total Athletes</h3>
+                <p className="stat-value">248</p>
+              </div>
+              <div className="stat-card">
+                <h3>Upcoming Matches</h3>
+                <p className="stat-value">5</p>
+              </div>
+            </section>
 
-        <section className="recent-activity">
-          <h3>Your Account Details</h3>
-          <div className="details-card">
-            <p><strong>Name:</strong> {user?.firstName} {user?.lastName}</p>
-            <p><strong>Email:</strong> {user?.email}</p>
-            <p><strong>Phone:</strong> {user?.phoneNumber}</p>
-          </div>
-        </section>
+            <section className="recent-activity">
+              <h3>Your Account Details</h3>
+              <div className="details-card">
+                <p><strong>Name:</strong> {user?.firstName} {user?.lastName}</p>
+                <p><strong>Email:</strong> {user?.email}</p>
+                <p><strong>Phone:</strong> {user?.phoneNumber}</p>
+              </div>
+            </section>
+          </>
+        ) : (
+          <Stores />
+        )}
       </main>
 
       <style>{`
