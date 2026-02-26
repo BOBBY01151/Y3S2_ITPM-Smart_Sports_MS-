@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "dist/server.js",
+  "main": "src/server.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
-    "start": "node dist/server.js",
-    "build": "tsc"
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",
@@ -21,12 +20,6 @@
     "mongoose": "^9.2.1"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.6",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^25.3.0",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "nodemon": "^3.1.9"
   }
 }

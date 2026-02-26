@@ -1,4 +1,3 @@
-import { type Request, type Response } from 'express';
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -8,7 +7,7 @@ dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET || 'your_super_secret_key_123';
 
 // Register User
-export const register = async (req: Request, res: Response): Promise<void> => {
+export const register = async (req, res) => {
     try {
         const { firstName, lastName, email, phoneNumber, password, confirmPassword } = req.body;
 
@@ -37,14 +36,14 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         await newUser.save();
 
         res.status(201).json({ message: 'User registered successfully' });
-    } catch (error: any) {
+    } catch (error) {
         console.error('Registration error:', error);
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
 
 // Login User
-export const login = async (req: Request, res: Response): Promise<void> => {
+export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -80,7 +79,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
                 phoneNumber: user.phoneNumber,
             },
         });
-    } catch (error: any) {
+    } catch (error) {
         console.error('Login error:', error);
         res.status(500).json({ message: 'Server error', error: error.message });
     }
